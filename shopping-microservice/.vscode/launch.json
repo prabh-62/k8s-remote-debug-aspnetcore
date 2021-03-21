@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "name": "Kubernetes: Debug",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": false,
+      "cleanUp": true,
+      "portForward": true,
+      "preLaunchTask": "publish",
+      "imageRegistry": "docker.io/prabh",
+      "debug": [
+        {
+          "image": "prabh/shopping-microservice",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/app"
+          }
+        }
+      ]
+    }
+  ]
+}
