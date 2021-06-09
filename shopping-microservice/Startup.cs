@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using shopping_microservice.Interfaces;
+using shopping_microservice.Services;
 
 namespace shopping_microservice
 {
@@ -19,11 +21,11 @@ namespace shopping_microservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IHealthService, HealthService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "shopping_microservice", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "shopping_microservice", Version = "v1"});
             });
         }
 
@@ -43,10 +45,7 @@ namespace shopping_microservice
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
